@@ -217,6 +217,9 @@ export const DEFAULT_SYSTEM_SETTINGS: Partial<SystemSettings> = {
   autoCheckUpdates: true,
   updateChannel: 'stable',
   screenWakeLock: false,
+  coverScreenEnabled: false,
+  coverScreenDim: 0,
+  coverScreenFit: 'fit',
   autohideCursor: true,
   screenBrightness: -1, // -1~100, -1 for system default
   autoScreenBrightness: true,

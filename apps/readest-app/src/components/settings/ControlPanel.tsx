@@ -30,6 +30,7 @@ import { canShareText } from '@/utils/share';
 import { useEinkRefreshSupported } from '@/hooks/useEinkRefreshSupported';
 import { optInTelemetry, optOutTelemetry } from '@/utils/telemetry';
 import KeyboardShortcutsSettings from './KeyboardShortcutsSettings';
+import CoverScreenSettings from './CoverScreenSettings';
 
 const ControlPanel: React.FC<SettingsPanelPanelProp> = ({ bookKey, onRegisterReset }) => {
   const _ = useTranslation();
@@ -698,6 +699,7 @@ const ControlPanel: React.FC<SettingsPanelPanelProp> = ({ bookKey, onRegisterRes
           onChange={() => setScreenWakeLock(!screenWakeLock)}
           data-setting-id='settings.control.screenWakeLock'
         />
+        <CoverScreenSettings />
         {!appService?.isMobile && (
           <SettingsSwitchRow
             label={_('Auto-hide Cursor')}

@@ -7,6 +7,7 @@ import { useAppUrlIngress } from '@/hooks/useAppUrlIngress';
 import { useOpenWithBooks } from '@/hooks/useOpenWithBooks';
 import { useOpenLaunchLinks } from '@/hooks/useOpenLaunchLinks';
 import { useHomeScreenWidgets } from '@/hooks/useHomeScreenWidgets';
+import { useCoverScreen } from '@/hooks/useCoverScreen';
 import { useOpenShareLink } from '@/hooks/useOpenShareLink';
 import { useOpenDeviceLink } from '@/hooks/useOpenDeviceLink';
 import { useClipUrlIngress } from '@/hooks/useClipUrlIngress';
@@ -27,6 +28,7 @@ export default function Page() {
   useOpenWithBooks();
   useOpenLaunchLinks();
   useHomeScreenWidgets();
+  useCoverScreen();
   useOpenShareLink();
   useOpenDeviceLink();
   useClipUrlIngress();

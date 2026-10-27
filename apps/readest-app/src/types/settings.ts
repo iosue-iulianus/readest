@@ -483,6 +483,12 @@ export interface SystemSettings {
   autoCheckUpdates: boolean;
   updateChannel: 'stable' | 'nightly';
   screenWakeLock: boolean;
+  /** Show the open book's cover on a foldable's outer screen while unfolded (Android). */
+  coverScreenEnabled: boolean;
+  /** How much to dim that cover, in percent. */
+  coverScreenDim: number;
+  /** Show the whole cover, or crop it to fill the outer screen. */
+  coverScreenFit: LibraryCoverFitType;
   autohideCursor: boolean;
   screenBrightness: number;
   autoScreenBrightness: boolean;

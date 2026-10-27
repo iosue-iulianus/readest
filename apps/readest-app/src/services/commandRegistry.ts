@@ -570,6 +570,24 @@ const controlPanelItems = [
     section: 'Device',
   },
   {
+    id: 'settings.control.coverScreen',
+    labelKey: _('Cover Screen'),
+    keywords: ['cover', 'outer', 'screen', 'fold', 'foldable', 'display'],
+    section: 'Device',
+  },
+  {
+    id: 'settings.control.coverScreenFit',
+    labelKey: _('Cover Screen Fit'),
+    keywords: ['cover', 'outer', 'screen', 'fold', 'fit', 'crop', 'fill'],
+    section: 'Device',
+  },
+  {
+    id: 'settings.control.coverScreenDim',
+    labelKey: _('Cover Screen Dimming'),
+    keywords: ['cover', 'outer', 'screen', 'fold', 'dim', 'brightness'],
+    section: 'Device',
+  },
+  {
     id: 'settings.control.autohideCursor',
     labelKey: _('Auto-hide Cursor'),
     keywords: ['cursor', 'mouse', 'pointer', 'hide', 'autohide', 'idle'],
