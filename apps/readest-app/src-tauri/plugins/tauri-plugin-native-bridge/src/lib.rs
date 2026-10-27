@@ -12,6 +12,7 @@ mod desktop;
 mod mobile;
 
 mod commands;
+mod cover_screen;
 mod error;
 mod models;
 mod platform;
@@ -105,6 +106,10 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             commands::update_reading_widget,
             commands::get_reading_widget_instances,
             commands::set_reading_widget_catalog,
+            cover_screen::get_cover_screen_status,
+            cover_screen::set_cover_screen_book,
+            cover_screen::start_cover_screen,
+            cover_screen::stop_cover_screen,
             commands::capture_webview_region,
             commands::paper_curl,
             commands::cover_webview_region,

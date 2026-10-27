@@ -342,6 +342,8 @@ class NativeBridgePlugin(private val activity: Activity): Plugin(activity) {
             // Releasing an unheld lock throws on some OEM builds; ignore.
         }
         multicastLock = null
+        coverScreen?.close()
+        coverScreen = null
         pluginScope.cancel()
         activity.application.unregisterActivityLifecycleCallbacks(lifecycleCallbacks)
         instance = null
@@ -1717,6 +1719,54 @@ class NativeBridgePlugin(private val activity: Activity): Plugin(activity) {
     fun set_reading_widget_catalog(invoke: Invoke) {
         ReadingWidgetStore.writeCatalog(activity, invoke.getArgs().toString())
         invoke.resolve()
+    }
+
+    // Created by the first cover screen command (the Android settings panel's
+    // status probe, or the reader with the setting on).
+    private var coverScreen: CoverScreenController? = null
+
+    private fun coverScreen(): CoverScreenController =
+        coverScreen ?: CoverScreenController(activity, pluginScope) { supported, status ->
+            triggerEvent("cover-screen-status", JSObject().apply {
+                put("supported", supported)
+                put("status", status)
+            })
+        }.also { coverScreen = it }
+
+    @Command
+    fun get_cover_screen_status(invoke: Invoke) {
+        pluginScope.launch {
+            val (supported, status) = coverScreen().status()
+            invoke.resolve(JSObject().apply {
+                put("supported", supported)
+                put("status", status)
+            })
+        }
+    }
+
+    @Command
+    fun set_cover_screen_book(invoke: Invoke) {
+        val args = invoke.parseArgs(SetCoverScreenBookRequestArgs::class.java)
+        pluginScope.launch {
+            coverScreen().setBook(CoverScreenController.Book(args))
+            invoke.resolve()
+        }
+    }
+
+    @Command
+    fun start_cover_screen(invoke: Invoke) {
+        pluginScope.launch {
+            coverScreen().start()
+            invoke.resolve()
+        }
+    }
+
+    @Command
+    fun stop_cover_screen(invoke: Invoke) {
+        pluginScope.launch {
+            coverScreen?.stop()
+            invoke.resolve()
+        }
     }
 
     // ── Sync passphrase keychain ──────────────────────────────────────

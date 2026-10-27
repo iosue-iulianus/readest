@@ -566,6 +566,38 @@ impl<R: Runtime> NativeBridge<R> {
     }
 }
 
+/// Foldable outer screen (Android only; iOS has no implementation). See `cover_screen.rs`.
+impl<R: Runtime> NativeBridge<R> {
+    pub fn get_cover_screen_status(
+        &self,
+    ) -> crate::Result<crate::cover_screen::CoverScreenStatusResponse> {
+        self.0
+            .run_mobile_plugin("get_cover_screen_status", ())
+            .map_err(Into::into)
+    }
+
+    pub fn set_cover_screen_book(
+        &self,
+        payload: crate::cover_screen::SetCoverScreenBookRequest,
+    ) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin("set_cover_screen_book", payload)
+            .map_err(Into::into)
+    }
+
+    pub fn start_cover_screen(&self) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin("start_cover_screen", ())
+            .map_err(Into::into)
+    }
+
+    pub fn stop_cover_screen(&self) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin("stop_cover_screen", ())
+            .map_err(Into::into)
+    }
+}
+
 impl<R: Runtime> NativeBridge<R> {
     /// Snapshot a region of the webview as PNG bytes for the mesh
     /// page-curl texture (#555). The Swift (WKWebView takeSnapshot) or
